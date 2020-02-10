@@ -9,7 +9,7 @@
                     <label for="">String</label>
                     <textarea class="form-control border" name="" id="" rows="10" v-model="inputArea"></textarea>
                 </div>
-                <p>{{inputArea}}</p>
+                <p>{{md5hash}}</p>
                 <n-button type="primary" v-on:click="convert">Mã hóa</n-button>
             </card>
         </div>
@@ -20,6 +20,7 @@
 <script>
     import {Card} from '@/components'
     import {Button} from '@/components'
+    import md5 from 'blueimp-md5'
 
     export default {
         name: "md5.vue",
@@ -28,11 +29,15 @@
             "n-button": Button,
         },
         data() {
-            inputArea : ''
+            return {
+                inputArea: '',
+                md5hash:''
+            }
         },
-        methods : {
-            convert : function () {
-                console.log(inputArea)
+        methods: {
+            convert: function () {
+                let md5hash = md5(this.inputArea);
+                return md5hash
             }
         }
     }
